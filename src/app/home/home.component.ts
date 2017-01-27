@@ -1,25 +1,21 @@
 import { Component } from '@angular/core';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent{
-  
-  baseUrl = "http://image.tmdb.org/t/p/w300/";
+export class HomeComponent {
 
-  constructor(){}
+  baseUrl = 'http://image.tmdb.org/t/p/w300/';
 
     /**
-   * Get the Total Url of image
-   * @param {String} Src of image
-   * @return {String} Total Url of image
+   * Get the complete Url ofthe  image
+   * @param {String} src of the image
+   * @return {String} complete Url of the image
    */
-  getUrl(src: string): string {
+  public getUrl(src: string): string {
     return `${this.baseUrl}${src}`;
   }
-  
+
 }
