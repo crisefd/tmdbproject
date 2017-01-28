@@ -5,39 +5,46 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css']
+  styleUrls: ['./movie.component.less']
 })
 export class MovieComponent implements OnInit {
-
-  baseUrl = "http://image.tmdb.org/t/p/w300/";
+  /**
+  * Base Url for the movie's images
+  */
+  baseUrl: string = 'http://image.tmdb.org/t/p/w300/';
+  /**
+  * Movie details
+  */
   details = {};
-  keyvideo:string;
-  
+  /**
+  * Trailer's key video
+  */
+  keyvideo: string;
 
-  constructor(private movieService: MovieService, private route: ActivatedRoute,
-  		private router: Router){
-  		}
+  public constructor(private movieService: MovieService,
+                     private route: ActivatedRoute,
+                     private router: Router) { }
 
   /**
   * Get a movie with your id
   */
-  ngOnInit(){
+  public ngOnInit() {
     this.route.params.subscribe(params => {
       let id = params['id'];
       this.movieService.getMovie(id).subscribe(details => {
         this.details = details;
-        this.keyvideo=details.videos.results[0];
+        this.keyvideo = details.videos.results[0];
       });
     });
   }
-  
+
   /**
-  * Get the Total Url of image
-  * @param {String} Src of image
-  * @return {String} Total Url of image
+  * Get the complete Url of the image
+  * @param {String} src the source of the image
+  * @return {String} The complete Url of image
   */
-  getUrl(src: string): string {
+  public getUrl(src: string): string {
     return `${this.baseUrl}${src}`;
   }
-  
+
 }
