@@ -15,7 +15,7 @@ export class MovieComponent implements OnInit {
   /**
   * Movie details
   */
-  details = {};
+  details: any = {};
   /**
   * Trailer's key video
   */
@@ -33,7 +33,8 @@ export class MovieComponent implements OnInit {
       let id = params['id'];
       this.movieService.getMovie(id).subscribe(details => {
         this.details = details;
-        this.keyvideo = details.videos.results[0];
+        console.log(this.details);
+        if (this.details['videos']) { this.keyvideo = this.details['videos'].results[0]; }
       });
     });
   }

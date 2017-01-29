@@ -1,57 +1,57 @@
 <md-card *ngIf="credits.length > 0">
-    <md-toolbar color= "accent">
-        <button md-button id="subprincipal" (click)="changeState();">
+  <md-toolbar color="accent">
+    <button md-button id="subprincipal" (click)="changeState();">
             <md-icon *ngIf="!active" color="primary">add</md-icon>
             <md-icon *ngIf="active" color="primary">remove</md-icon>
             Cast
         </button>
-    </md-toolbar>
-    <div [hidden]="!active">
-        <md-toolbar color= "primary">
-            <button md-button id="principal"  (click)="changeOrder();">
+  </md-toolbar>
+  <div [hidden]="!active">
+    <md-toolbar color="primary">
+      <button md-button id="principal" (click)="changeOrder();">
                 <md-icon *ngIf="!orderUp" color="accent">arrow_downward</md-icon>
                 <md-icon *ngIf="orderUp" color="accent">arrow_upward</md-icon>
                 Order
             </button>
-            
-            <button md-button id="principal" [ngStyle]="{border: '2px solid' + borderColorRelevance}" (click)="changeParameterRelevance();">
+
+      <button md-button id="principal" [ngStyle]="{border: '2px solid' + borderColorRelevance}" (click)="changeParameterRelevance();">
                 <md-icon color="accent">star</md-icon>
                 Relevance
             </button>
-            <button md-button id="principal" [ngStyle]="{border: '2px solid' + borderColorAlphabetic}" (click)="changeParameterAlphabetic();">
+      <button md-button id="principal" [ngStyle]="{border: '2px solid' + borderColorAlphabetic}" (click)="changeParameterAlphabetic();">
                 <md-icon color="accent">font_download</md-icon>
                 Alphabetic
             </button>
-            
-        </md-toolbar>
-        <md-grid-list   cols="5">
-            <div *ngFor="let credit of credits">
-                <md-grid-tile >
-                    <md-grid-tile-header>
-                        <a (click)="goPerson(credit.id)" *ngIf="credit.name">
+
+    </md-toolbar>
+    <md-grid-list cols="5">
+      <div *ngFor="let credit of credits">
+        <md-grid-tile>
+          <md-grid-tile-header>
+            <a (click)="goPerson(credit.id)" *ngIf="credit.name">
                             {{credit.name}}
                         </a>
-                    </md-grid-tile-header>                    
-                    
-                    <a (click)="goPerson(credit.id)" title="{{ credit.name }}" >
-                        <img class="img" *ngIf="credit.profile_path" src="{{getUrl(credit.profile_path)}}">
-                        <img class="img" *ngIf="!credit.profile_path" src="assets/images/photonotavailable.jpg">
-                    </a>
-                    <md-grid-tile-footer>
-                         <div>
-                            <md-icon class="icons">account_box</md-icon>
-                            <a (click)="goPerson(credit.id)" *ngIf="credit.character">
+          </md-grid-tile-header>
+
+          <a (click)="goPerson(credit.id)" title="{{ credit.name }}">
+            <img class="img" *ngIf="credit.profile_path" src="{{getUrl(credit.profile_path)}}">
+            <img class="img" *ngIf="!credit.profile_path" src="assets/images/photonotavailable.jpg">
+          </a>
+          <md-grid-tile-footer>
+            <div>
+              <md-icon class="icons">account_box</md-icon>
+              <a (click)="goPerson(credit.id)" *ngIf="credit.character">
                                  {{credit.character}}
                             </a>
-                            <a (click)="goPerson(credit.id)" *ngIf="!credit.character" class="unavailable">
+              <a (click)="goPerson(credit.id)" *ngIf="!credit.character" class="unavailable">
                                 Unvailable
                             </a>
-                        </div>
-                    </md-grid-tile-footer>
-                </md-grid-tile>
             </div>
-        
-      </md-grid-list>
-    </div>
-    
- </md-card>
+          </md-grid-tile-footer>
+        </md-grid-tile>
+      </div>
+
+    </md-grid-list>
+  </div>
+
+</md-card>

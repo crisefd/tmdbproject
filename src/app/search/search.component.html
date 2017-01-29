@@ -1,40 +1,40 @@
 <app-toolbar *ngIf="!preview"></app-toolbar>
 <md-card *ngIf="!preview">
-    
-    
+
+
 </md-card>
 
 
-<md-input dividerColor="accent" (blur)="changeFocus(false)" (focus)="changeFocus(true)" placeholder="Search for an Actor, Actress, or Movie" value="" [(ngModel)]="search" (ngModelChange)="doSearch($event)">
+<md-input dividerColor="accent" (blur)="changeFocus(false)" (focus)="changeFocus(true)" 
+          placeholder="Search for an Actor, Actress, or Movie" value="" 
+          [(ngModel)]="searchPhrase" (ngModelChange)="doSearch($event)">
 </md-input>
 
 <div (mouseleave)="changeState(false)" (mouseover)="changeState(true)">
-    <div [hidden]="!((resultsPersons.length> 0 || resultsMovies.length > 0) && (active || focus))" class="pull-right" >
-        <div *ngFor="let result of resultsPersons; let i = index;">
-            <a (click)="goPerson(result.id)">
-                <div class="results" [ngStyle]="{'background-color': colorsPersons[i]}" (mouseleave)="removeColorPersons(i)" (mouseover)="putColorPersons(i)">
-                    <img *ngIf="result.profile_path" src="{{getUrl(result.profile_path)}}" class="autocomplete">
-                    <img *ngIf="!result.profile_path" src="assets/images/photonotavailable.jpg"  class="autocomplete">
-                    {{ result.name }}
-                </div>
-            </a>
+  <div [hidden]="!((resultsPersons.length> 0 || resultsMovies.length > 0) && (active || focus))" class="pull-right">
+    <div *ngFor="let result of resultsPersons; let i = index;">
+      <a (click)="goPerson(result.id)">
+        <div class="results" [ngStyle]="{'background-color': colorsPersons[i]}" (mouseleave)="removeColorPersons(i)" (mouseover)="putColorPersons(i)">
+          <img *ngIf="result.profile_path" src="{{getUrl(result.profile_path)}}" class="autocomplete">
+          <img *ngIf="!result.profile_path" src="assets/images/photonotavailable.jpg" class="autocomplete"> {{ result.name }}
         </div>
-        <div *ngFor="let result of resultsMovies; let i = index;">
-            <a (click)="goMovie(result.id)" >
-                <div class="results" [ngStyle]="{'background-color': colorsMovies[i]}" (mouseleave)="removeColorMovies(i)" (mouseover)="putColorMovies(i)">
-                    <img *ngIf="result.poster_path" src="{{getUrl(result.poster_path)}}"  class="autocomplete">
-                    <img *ngIf="!result.poster_path" src="assets/images/posternotavailable.jpg"  class="autocomplete">
-                    {{ result.title }}
-                </div>
-            </a>
-        </div>
-        <div>
-            <a (click)="goExpanded()" >
-                <div class="results" [ngStyle]="{'background-color': color}" (mouseleave)="removeColor()" (mouseover)="putColor()">
-                    
-                    <h3><md-icon color="primary">search</md-icon>See all results for {{ search }}</h3>
-                </div>
-            </a>
-        </div>
+      </a>
     </div>
+    <div *ngFor="let result of resultsMovies; let i = index;">
+      <a (click)="goMovie(result.id)">
+        <div class="results" [ngStyle]="{'background-color': colorsMovies[i]}" (mouseleave)="removeColorMovies(i)" (mouseover)="putColorMovies(i)">
+          <img *ngIf="result.poster_path" src="{{getUrl(result.poster_path)}}" class="autocomplete">
+          <img *ngIf="!result.poster_path" src="assets/images/posternotavailable.jpg" class="autocomplete"> {{ result.title }}
+        </div>
+      </a>
+    </div>
+    <div>
+      <a (click)="goExpanded()">
+        <div class="results" [ngStyle]="{'background-color': color}" (mouseleave)="removeColor()" (mouseover)="putColor()">
+
+          <h3><md-icon color="primary">search</md-icon>See all results for {{ searchPhrase }}</h3>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
