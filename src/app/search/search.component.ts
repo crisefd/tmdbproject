@@ -11,7 +11,7 @@ export class SearchComponent implements OnInit {
   baseUrl = 'http://image.tmdb.org/t/p/w300/';
   resultsPersons = [];
   resultsMovies = [];
-  search_phrase: string;
+  searchPhrase: string;
   active: boolean = false;
   focus: boolean = false;
   colorsPersons: Array<string> = [];
@@ -92,7 +92,7 @@ export class SearchComponent implements OnInit {
   public clear() {
     this.resultsPersons = [];
     this.resultsMovies = [];
-    this.search_phrase = '';
+    this.searchPhrase = '';
     this.active = false;
   }
 
@@ -100,15 +100,15 @@ export class SearchComponent implements OnInit {
   * Performs the search of persons and movies
   */
   public doSearch() {
-    if (this.search_phrase.length >= 2) {
-      this.movieService.searchPerson(this.search_phrase)
+    if (this.searchPhrase.length >= 2) {
+      this.movieService.searchPerson(this.searchPhrase)
         .subscribe(resultsPersons => {
           this.resultsPersons = resultsPersons.results.slice(0, 3);
           for (let i = 0; i < this.resultsPersons.length; i++) {
             this.colorsPersons[i] = '#FFFFFF';
           }
         });
-      this.movieService.searchMovie(this.search_phrase)
+      this.movieService.searchMovie(this.searchPhrase)
         .subscribe(resultsMovies => {
           this.resultsMovies = resultsMovies.results.slice(0, 3);
           for (let i = 0; i < this.resultsPersons.length; i++) {
@@ -152,6 +152,6 @@ export class SearchComponent implements OnInit {
   * Redirect to expanded search
   */
   public goExpanded() {
-    this.router.navigate(['/searchexpanded/persons/' + this.search_phrase + '/1']);
+    this.router.navigate(['/searchexpanded/persons/' + this.searchPhrase + '/1']);
   }
 }
