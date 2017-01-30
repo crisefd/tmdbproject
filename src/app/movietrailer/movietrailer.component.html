@@ -1,12 +1,9 @@
 <div>
-    <button md-fab color="accent" (click)="changeState();">
+  <button md-fab color="accent" (click)="changeState();">
         <md-icon *ngIf="active"color="primary">remove</md-icon>
         <md-icon *ngIf="!active" color="primary">add</md-icon>
     </button>
 </div>
 <div *ngIf="active">
-    <iframe class="video" [src]="getUrlVideo()" frameborder="0" allowfullscreen></iframe>
+  <iframe class="video" [src]="getUrlVideo()" frameborder="0" allowfullscreen></iframe>
 </div>
-
-
-
