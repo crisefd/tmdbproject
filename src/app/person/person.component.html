@@ -1,74 +1,73 @@
 <app-toolbar></app-toolbar>
 <md-card>
-    <md-card-content>
-       <h1 id="subprincipal"> {{ details.name }} </h1> 
-    </md-card-content>
+  <md-card-content>
+    <h1 id="subprincipal"> {{ details.name }} </h1>
+  </md-card-content>
 </md-card>
 
 <div *ngIf="details.credits">
-    <app-personcast [credits]="details.credits.cast"></app-personcast>
+  <app-personcast [credits]="details.credits.cast"></app-personcast>
 </div>
 <div *ngIf="details.credits">
-    <app-personcrew [credits]="details.credits.crew"></app-personcrew>
+  <app-personcrew [credits]="details.credits.crew"></app-personcrew>
 </div>
 
 <md-card>
-    <md-card-title-group>
-        <img *ngIf="details.profile_path" class="image" src="{{getUrl(details.profile_path)}}">
-        <img *ngIf="!details.profile_path" class="image" src="assets/images/photonotavailable.jpg">
-        <md-card-subtitle>
-            <md-card *ngIf="details.biography">
-                <span>
+  <md-card-title-group>
+    <img *ngIf="details.profile_path" class="image" src="{{getUrl(details.profile_path)}}">
+    <img *ngIf="!details.profile_path" class="image" src="assets/images/photonotavailable.jpg">
+    <md-card-subtitle>
+      <md-card *ngIf="details.biography">
+        <span>
                     {{ details.biography }}
                 </span>
-            </md-card>
-            
-            <md-card *ngIf="!details.biography" class="unavailable">
-                <span>
+      </md-card>
+
+      <md-card *ngIf="!details.biography" class="unavailable">
+        <span>
                     Biography not available, for more information see {{ details.name }} in 
                     <a href="https://es.wikipedia.org/">https://es.wikipedia.org/</a>
                 </span>
-            </md-card>
+      </md-card>
 
-            <md-card>
-                <div *ngIf="details.birthday">
-                    <md-icon class="icons">visibility</md-icon>
-                    Birth: {{ details.birthday | date }}
-                </div>
-                <div *ngIf="!details.birthday" class="unavailable">
-                    <md-icon class="icons">visibility</md-icon>
-                    Birth: Resource not available
-                </div>
-                
-                <div *ngIf="details.deathday">
-                    <md-icon class="icons">access_time</md-icon>
-                    Death: {{ details.deathday | date}}
-                </div>
-                <div *ngIf="!details.deathday" class="unavailable">
-                    <md-icon class="icons">access_time</md-icon>
-                    Death:  Resource not available
-                </div>
-                
-                <div *ngIf="details.place_of_birth">
-                    <md-icon class="icons">access_time</md-icon>
-                    Place of Birth: {{ details.place_of_birth}}
-                </div>
-                <div *ngIf="!details.place_of_birth" class="unavailable">
-                    <md-icon class="icons">access_time</md-icon>
-                    Place of Birth: Resource not available
-                </div>
-                
-                <div *ngIf="details.homepage">
-                    <md-icon class="icons">home</md-icon>
-                    Homepage: <a href="{{details.homepage }}" target=_new>{{details.homepage }}</a>
-                </div>
-                <div *ngIf="!details.homepage" class="unavailable">
-                    <md-icon class="icons">home</md-icon>
-                    Homepage: Resource not available
-                </div>
-            </md-card>
+      <md-card>
+        <div *ngIf="details.birthday">
+          <md-icon class="icons">visibility</md-icon>
+          Birth: {{ details.birthday | date }}
+        </div>
+        <div *ngIf="!details.birthday" class="unavailable">
+          <md-icon class="icons">visibility</md-icon>
+          Birth: Resource not available
+        </div>
 
-        </md-card-subtitle>
-   </md-card-title-group>
+        <div *ngIf="details.deathday">
+          <md-icon class="icons">access_time</md-icon>
+          Death: {{ details.deathday | date}}
+        </div>
+        <div *ngIf="!details.deathday" class="unavailable">
+          <md-icon class="icons">access_time</md-icon>
+          Death: Resource not available
+        </div>
+
+        <div *ngIf="details.place_of_birth">
+          <md-icon class="icons">access_time</md-icon>
+          Place of Birth: {{ details.place_of_birth}}
+        </div>
+        <div *ngIf="!details.place_of_birth" class="unavailable">
+          <md-icon class="icons">access_time</md-icon>
+          Place of Birth: Resource not available
+        </div>
+
+        <div *ngIf="details.homepage">
+          <md-icon class="icons">home</md-icon>
+          Homepage: <a href="{{details.homepage }}" target=_new>{{details.homepage }}</a>
+        </div>
+        <div *ngIf="!details.homepage" class="unavailable">
+          <md-icon class="icons">home</md-icon>
+          Homepage: Resource not available
+        </div>
+      </md-card>
+
+    </md-card-subtitle>
+  </md-card-title-group>
 </md-card>
-
