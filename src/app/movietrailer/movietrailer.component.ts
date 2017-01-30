@@ -4,30 +4,39 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-movietrailer',
   templateUrl: './movietrailer.component.html',
-  styleUrls: ['./movietrailer.component.css'],
+  styleUrls: ['./movietrailer.component.less'],
 })
 export class MovietrailerComponent implements OnInit, OnChanges {
+  /**
+  * Video's key
+  */
   @Input() key: string;
-  active:boolean=false;
+  /**
+  * Flag for video's activation
+  */
+  active: boolean = false;
+  /**
+  * Video's Url
+  */
   url: SafeResourceUrl;
-  sanitizer:any;
-  constructor(sanitizer: DomSanitizer) {
-    this.sanitizer=sanitizer;
+
+  public constructor(public sanitizer: DomSanitizer) { }
+
+  public ngOnInit() { }
+
+  public ngOnChanges(changes) {
+    this.active = false;
+  }
+  /**
+  * Get video Url
+  */
+  public getUrlVideo(): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.key}/?rel=0&`);
   }
 
-  ngOnInit() {
-  }
-  
-  ngOnChanges(changes){
-    this.active=false;
-  }
-  
-  getUrlVideo(): string {
-      return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.key}/?rel=0&`);
-  }
-  
-  changeState() {
-    this.active=!this.active;
+  public changeState() {
+    this.active = !this.active;
   }
 
 }
+
