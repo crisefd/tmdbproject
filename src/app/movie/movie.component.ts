@@ -33,7 +33,6 @@ export class MovieComponent implements OnInit {
       let id = params['id'];
       this.movieService.getMovie(id).subscribe(details => {
         this.details = details;
-        console.log(this.details);
         if (this.details['videos']) { this.keyvideo = this.details['videos'].results[0]; }
       });
     });
