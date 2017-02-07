@@ -5,22 +5,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-popularmovies',
   templateUrl: './popularmovies.component.html',
-  styleUrls: ['./popularmovies.component.css']
+  styleUrls: ['./popularmovies.component.less']
 })
 export class PopularmoviesComponent implements OnInit {
-  
-  baseUrl = "http://image.tmdb.org/t/p/w300/";
+
+  baseUrl = 'http://image.tmdb.org/t/p/w300/';
   movies = [];
   @Input() preview: boolean = false;
 
-  constructor(private movieService: MovieService, private route: ActivatedRoute,
-  		private router: Router){}
+  public constructor(private movieService: MovieService, private route: ActivatedRoute,
+                     private router: Router) { }
 
-  ngOnInit(){
+  public ngOnInit() {
     this.movieService.getPopular()
       .subscribe(movies => {
         if (this.preview) {
-          this.movies = movies.slice(0,10);
+          this.movies = movies.slice(0, 10);
         }
         else {
           this.movies = movies;
@@ -28,16 +28,16 @@ export class PopularmoviesComponent implements OnInit {
       });
   }
 
-  getUrl(src: string): string {
+  public getUrl(src: string): string {
     return `${this.baseUrl}${src}`;
   }
-  
-  goPopularMovies() {
+
+  public goPopularMovies() {
     this.router.navigate(['/popularmovies']);
   }
-  
-  goMovie(id:number) {
-    this.router.navigate(['/movie/'+id]);
+
+  public goMovie(id: number) {
+    this.router.navigate(['/movie/' + id]);
   }
-  
+
 }
