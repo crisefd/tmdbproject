@@ -5,16 +5,14 @@
 </md-card>
 
 
-<md-input dividerColor="accent" (blur)="changeFocus(false)" (focus)="changeFocus(true)" 
-          placeholder="Search for an Actor, Actress, or Movie" value="" 
-          [(ngModel)]="searchPhrase" (ngModelChange)="doSearch($event)">
+<md-input dividerColor="accent" (blur)="changeFocus(false)" (focus)="changeFocus(true)" placeholder="Search for an Actor, Actress, or Movie" value="" [(ngModel)]="searchPhrase" (ngModelChange)="doSearch($event)">
 </md-input>
 
 <div (mouseleave)="changeState(false)" (mouseover)="changeState(true)">
-  <div [hidden]="!((resultsPersons.length> 0 || resultsMovies.length > 0) && (active || focus))" class="pull-right">
-    <div *ngFor="let result of resultsPersons; let i = index;">
+  <div [hidden]="!((resultsPeople.length> 0 || resultsMovies.length > 0) && (active || focus))" class="pull-right">
+    <div *ngFor="let result of resultsPeople; let i = index;">
       <a (click)="goPerson(result.id)">
-        <div class="results" [ngStyle]="{'background-color': colorsPersons[i]}" (mouseleave)="removeColorPersons(i)" (mouseover)="putColorPersons(i)">
+        <div class="results" [ngStyle]="{'background-color': colorsPeople[i]}" (mouseleave)="removeColorPeople(i)" (mouseover)="putColorPeople(i)">
           <img *ngIf="result.profile_path" src="{{getUrl(result.profile_path)}}" class="autocomplete">
           <img *ngIf="!result.profile_path" src="assets/images/photonotavailable.jpg" class="autocomplete"> {{ result.name }}
         </div>
