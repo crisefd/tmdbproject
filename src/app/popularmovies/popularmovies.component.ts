@@ -8,8 +8,13 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./popularmovies.component.less']
 })
 export class PopularmoviesComponent implements OnInit {
-
+  /**
+  * Base Url for the movie's images
+  */
   baseUrl = 'http://image.tmdb.org/t/p/w300/';
+  /**
+  * Movie list
+  */
   movies = [];
   @Input() preview: boolean = false;
 

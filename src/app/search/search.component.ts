@@ -5,33 +5,62 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.less']
 })
 export class SearchComponent implements OnInit {
+
+  /**
+  * Base Url for the movie's images
+  */
   baseUrl = 'http://image.tmdb.org/t/p/w300/';
-  resultsPersons = [];
+  /**
+  * Search results for people
+  */
+  resultsPeople = [];
+  /**
+  * Search results for movies
+  */
   resultsMovies = [];
+  /**
+  * Search phrase
+  */
   searchPhrase: string;
+  /**
+  * Active flag
+  */
   active: boolean = false;
+  /**
+  * Focus flag
+  */
   focus: boolean = false;
-  colorsPersons: Array<string> = [];
+  /**
+  * People's color list
+  */
+  colorsPeople: Array<string> = [];
+  /**
+  * Movies's color list
+  */
   colorsMovies: Array<string> = [];
   color: string = '#FFFFFF';
+  /**
+  * Total number of pages
+  */
   totalPages: number;
   @Input() preview: boolean;
 
   public constructor(private movieService: MovieService,
                      private route: ActivatedRoute,
                      private router: Router) {
-    this.router.events.subscribe(path => {
-      this.clear();
-    });
+                     this.router.events.subscribe(path => {
+                       this.clear();
+                     });
   }
 
-  public ngOnInit() {}
+  public ngOnInit() { }
 
   /**
   * Change the state of box search
+  * @param {Boolean} active Value for active flag
   */
   public changeState(active: boolean) {
     this.active = active;
@@ -39,6 +68,7 @@ export class SearchComponent implements OnInit {
 
   /**
   * Change the state of input search
+  * @param {Boolean} focus Value for focus flag
   */
   public changeFocus(focus: boolean) {
     this.focus = focus;
@@ -60,13 +90,15 @@ export class SearchComponent implements OnInit {
 
   /**
   * Shade background of result of person
+  * @param {Integer} i Index number for person
   */
-  public putColorPersons(i: number) {
-    this.colorsPersons[i] = '#C6DEFF';
+  public putColorPeople(i: number) {
+    this.colorsPeople[i] = '#C6DEFF';
   }
 
   /**
   * Shade background of result of movie
+  * @param {Integer} i Index number for person
   */
   public putColorMovies(i: number) {
     this.colorsMovies[i] = '#C6DEFF';
@@ -74,13 +106,15 @@ export class SearchComponent implements OnInit {
 
   /**
   * Clear background of result of person
+  * @param {Integer} i Index number for person
   */
-  public removeColorPersons(i: number) {
-    this.colorsPersons[i] = '#FFFFFF';
+  public removeColorPeople(i: number) {
+    this.colorsPeople[i] = '#FFFFFF';
   }
 
   /**
   * Clear background of result of movie
+  * @param {Integer} i Index number for movie
   */
   public removeColorMovies(i: number) {
     this.colorsMovies[i] = '#FFFFFF';
@@ -90,43 +124,41 @@ export class SearchComponent implements OnInit {
   * Reset variables
   */
   public clear() {
-    this.resultsPersons = [];
+    this.resultsPeople = [];
     this.resultsMovies = [];
     this.searchPhrase = '';
     this.active = false;
   }
 
   /**
-  * Performs the search of persons and movies
+  * Performs the search of people and movies
   */
   public doSearch() {
     if (this.searchPhrase.length >= 2) {
       this.movieService.searchPerson(this.searchPhrase)
-        .subscribe(resultsPersons => {
-          this.resultsPersons = resultsPersons.results.slice(0, 3);
-          for (let i = 0; i < this.resultsPersons.length; i++) {
-            this.colorsPersons[i] = '#FFFFFF';
+        .subscribe(resultsPeople => {
+          this.resultsPeople = resultsPeople.results.slice(0, 3);
+          for (let i = 0; i < this.resultsPeople.length; i++) {
+            this.colorsPeople[i] = '#FFFFFF';
           }
         });
       this.movieService.searchMovie(this.searchPhrase)
         .subscribe(resultsMovies => {
           this.resultsMovies = resultsMovies.results.slice(0, 3);
-          for (let i = 0; i < this.resultsPersons.length; i++) {
+          for (let i = 0; i < this.resultsPeople.length; i++) {
             this.colorsMovies[i] = '#FFFFFF';
           }
         });
-
-
     } else {
-      this.resultsPersons = [];
+      this.resultsPeople = [];
       this.resultsMovies = [];
     }
   }
 
   /**
-  * Get the complete Url of image
-  * @param {String} src the source of the  image
-  * @return {String} complete Url of  the image
+  * Get the complete Url of the image
+  * @param {String} src the source of the image
+  * @return {String} The complete Url of image
   */
   public getUrl(src: string): string {
     return `${this.baseUrl}${src}`;
@@ -152,6 +184,6 @@ export class SearchComponent implements OnInit {
   * Redirect to expanded search
   */
   public goExpanded() {
-    this.router.navigate(['/searchexpanded/persons/' + this.searchPhrase + '/1']);
+    this.router.navigate(['/searchexpanded/people/' + this.searchPhrase + '/1']);
   }
 }
