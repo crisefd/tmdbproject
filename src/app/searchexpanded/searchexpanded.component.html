@@ -1,71 +1,69 @@
 <app-toolbar></app-toolbar>
 
 <md-card>
-    <md-toolbar color= "accent">
-            <button md-button id="subprincipal" [ngStyle]="{border: '2px solid' + borderColorPerson}" (click)="changeParameterPerson();">
+  <md-toolbar color="accent">
+    <button md-button id="subprincipal" [ngStyle]="{border: '2px solid' + borderColorPerson}" (click)="changeParameterPerson();">
                 <md-icon color="primary">person</md-icon>
-                Persons
+                People
             </button>
-            <button md-button id="subprincipal" [ngStyle]="{border: '2px solid' + borderColorMovie}" (click)="changeParameterMovie();">
+    <button md-button id="subprincipal" [ngStyle]="{border: '2px solid' + borderColorMovie}" (click)="changeParameterMovie();">
                 <md-icon color="primary">movie</md-icon>
                 Movies
             </button>
-        </md-toolbar>
+  </md-toolbar>
 </md-card>
 <md-card>
-    <div *ngIf="parameter=='persons' && (resultsPersons.length  > 0)" class="center">
-        <div>
-            Page {{ page }} of {{ numberPage }}
-        </div>
-        <ul class="pagination" >
-            <li (click)="goPage(1,'persons')"><a>First</a></li>
-            <li><a  (click)="goBackPage('persons')">«</a></li>
-            <li><a  (click)="goForwardPage('persons')">»</a></li>
-            <li (click)="goPage(numberPage,'persons')"><a>Last</a></li>
-        </ul>
+  <div *ngIf="parameter=='people' && (resultsPeople.length  > 0)" class="center">
+    <div>
+      Page {{ page }} of {{ numberPage }}
     </div>
-    <div  *ngIf="parameter=='movies' && (resultsMovies.length  > 0)" class="center">
-        <div>
-            Page {{ page }} of {{ numberPage }}
-        </div>
-        <ul class="pagination">
-            <li (click)="goPage(1,'movies')"><a>First</a></li>
-            <li><a  (click)="goBackPage('movies')">«</a></li>
-            <li><a  (click)="goForwardPage('movies')">»</a></li>
-            <li (click)="goPage(numberPage,'movies')"><a>Last</a></li>
-        </ul>
+    <ul class="pagination">
+      <li (click)="goPage(1,'people')"><a>First</a></li>
+      <li><a (click)="goBackPage('people')">«</a></li>
+      <li><a (click)="goForwardPage('people')">»</a></li>
+      <li (click)="goPage(numberPage,'people')"><a>Last</a></li>
+    </ul>
+  </div>
+  <div *ngIf="parameter=='movies' && (resultsMovies.length  > 0)" class="center">
+    <div>
+      Page {{ page }} of {{ numberPage }}
     </div>
-    <div class="notfound" *ngIf="resultsPersons.length == 0 && parameter=='persons'">
-        No persons found
-    </div>
-    <div class="notfound" *ngIf="resultsMovies.length == 0 && parameter=='movies'">
-        No movies found
-    </div>
+    <ul class="pagination">
+      <li (click)="goPage(1,'movies')"><a>First</a></li>
+      <li><a (click)="goBackPage('movies')">«</a></li>
+      <li><a (click)="goForwardPage('movies')">»</a></li>
+      <li (click)="goPage(numberPage,'movies')"><a>Last</a></li>
+    </ul>
+  </div>
+  <div class="notfound" *ngIf="resultsPeople.length == 0 && parameter=='people'">
+    No people found
+  </div>
+  <div class="notfound" *ngIf="resultsMovies.length == 0 && parameter=='movies'">
+    No movies found
+  </div>
 </md-card>
-<md-card *ngIf="parameter=='persons'">
-    <div *ngFor="let result of resultsPersons; let i = index;">
-            <a (click)="goPerson(result.id)">
-                <div class="results" [ngStyle]="{'background-color': colors[i]}" (mouseleave)="removeColor(i)" (mouseover)="putColor(i)">
-                    <img *ngIf="result.profile_path" src="{{getUrl(result.profile_path)}}" class="autocomplete">
-                    <img *ngIf="!result.profile_path" src="assets/images/photonotavailable.jpg"  class="autocomplete">
-                    {{ result.name }}
-                </div>
-            </a>
-    </div>
+<md-card *ngIf="parameter=='people'">
+  <div *ngFor="let result of resultsPeople; let i = index;">
+    <a (click)="goPerson(result.id)">
+      <div class="results" [ngStyle]="{'background-color': colors[i]}" (mouseleave)="removeColor(i)" (mouseover)="putColor(i)">
+        <img *ngIf="result.profile_path" src="{{getUrl(result.profile_path)}}" class="autocomplete">
+        <img *ngIf="!result.profile_path" src="assets/images/photonotavailable.jpg" class="autocomplete"> {{ result.name }}
+      </div>
+    </a>
+  </div>
 
-    
+
 </md-card>
 
 <md-card *ngIf="parameter=='movies'">
-    <div *ngFor="let result of resultsMovies; let i = index;">
-            <a (click)="goMovie(result.id)">
-                <div class="results" [ngStyle]="{'background-color': colors[i]}" (mouseleave)="removeColor(i)" (mouseover)="putColor(i)">
-                    <img *ngIf="result.poster_path" src="{{getUrl(result.poster_path)}}" class="autocomplete">
-                    <img *ngIf="!result.poster_path" src="assets/images/posternotavailable.jpg"  class="autocomplete">
-                    {{ result.title }}
-                </div>
-            </a>
-    </div>
+  <div *ngFor="let result of resultsMovies; let i = index;">
+    <a (click)="goMovie(result.id)">
+      <div class="results" [ngStyle]="{'background-color': colors[i]}" (mouseleave)="removeColor(i)" (mouseover)="putColor(i)">
+        <img *ngIf="result.poster_path" src="{{getUrl(result.poster_path)}}" class="autocomplete">
+        <img *ngIf="!result.poster_path" src="assets/images/posternotavailable.jpg" class="autocomplete"> {{ result.title }}
+      </div>
+    </a>
+  </div>
 
-    
+
 </md-card>
